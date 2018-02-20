@@ -14,11 +14,8 @@ namespace Lib
 
         public static bool isOnline()
         {
-            // Set management scope
             ManagementScope scope = new ManagementScope(@"\root\cimv2");
             scope.Connect();
-
-            // Select Printers from WMI Object Collections
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Printer WHERE Name = 'EasyCoder PX4i (203 dpi) - DP'");
             var e = searcher.Get().GetEnumerator();
             if (!e.MoveNext())
@@ -38,10 +35,10 @@ namespace Lib
 
         public static void Print(List<Piece> pieces)
         {
-            ////if (!isOnline())
-            ////{
-            ////    throw new Exception("printeren er ikke online");
-            ////}
+            if (!isOnline())
+            {
+                throw new Exception("printeren er ikke online");
+            }
 
             var file = new StringBuilder();
             file.Append("LTS& ON" + Environment.NewLine);

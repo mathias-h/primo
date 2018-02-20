@@ -24,7 +24,7 @@ namespace Lib
             file.Append("[General]" + Environment.NewLine +
                 $"ProgName={batchName}" + Environment.NewLine +
                 $"ProgDes={parts.Id}" + Environment.NewLine +
-                $"[LengthsW01q01]" + Environment.NewLine);
+                $"[LenghtsW01q01]" + Environment.NewLine);
             
             foreach (var part in parts.Parts_)
             {

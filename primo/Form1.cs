@@ -30,8 +30,8 @@ namespace primo
             InitializeComponent();
 
             Load += (s, e) => {
-                if (!Printer.isOnline())
-                    throw new Exception("printeren er ikke online");
+                //if (!Printer.isOnline())
+                //    throw new Exception("printeren er ikke online");
 
                 ShowBatches();
             };
@@ -119,10 +119,21 @@ namespace primo
                     pieces.AddRange(p.Pieces);
                 }
             }
-            
-            Printer.Print(pieces);
-            new Cnc(part.Id, pieces).Start();
-            new Saw(SelectedBatch.Name, part).Start();
+
+            bool printerSelected = printerCheckBox.Checked;
+            bool cncSelected = cncCheckBox.Checked;
+            bool savSelected = savCheckBox.Checked;
+
+            if (!printerSelected && !savSelected && !cncSelected)
+            {
+                printerSelected = true;
+                savSelected = true;
+                cncSelected = true;
+            }
+
+            if (printerSelected) Printer.Print(pieces);
+            if (cncSelected) new Cnc(part.Id, pieces).Start();
+            if (savSelected) new Saw(SelectedBatch.Name, part).Start();
         }
 
         private void button2_Click(object sender, EventArgs e)

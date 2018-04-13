@@ -12,7 +12,7 @@ namespace Lib
         private static string PRN_FILENAME = Path.GetTempPath() + @"\print.prn";
         private static string SPOOL_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Primo\spool.exe";
 
-        public static bool isOnline()
+        public static bool IsOnline()
         {
             ManagementScope scope = new ManagementScope(@"\root\cimv2");
             scope.Connect();
@@ -35,7 +35,7 @@ namespace Lib
 
         public static void Print(List<Piece> pieces)
         {
-            if (!isOnline())
+            if (!IsOnline())
             {
                 throw new Exception("printeren er ikke online");
             }

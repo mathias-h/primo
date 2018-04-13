@@ -34,6 +34,6 @@ namespace Lib
             return new Piece(ktn, length, position, cnc, label.Prn, name);
         }
 
-        public override string ToString() => "KTN" + Ktn;
+        public override string ToString() => "KTN" + Ktn + " " + Length;
     }
 }

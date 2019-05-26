@@ -17,41 +17,42 @@ namespace Lib
             this.id = id;
             this.pieces = pieces;
         }
-        public void Start()
+        public void Start(bool isBig)
         {
             foreach (var piece in pieces)
             {
-                GenerateFMC(piece);
+                GenerateFMC(isBig, piece);
             }
 
-            GenerateGRP();
+            GenerateGRP(isBig);
         }
     
-        public void GenerateGRP()
+        public void GenerateGRP(bool isBig)
         {
             var data = "";
             
             foreach (var piece in pieces)
             {
-                data += $"1,{piece.Name}.FMC,C:\\IMAWOP\\SRC1\\{piece.Name}.SRC,/P=1" + Environment.NewLine;
+                var srcPath = "C:\\IMAWOP\\" + (isBig ? "SRC1\\" : "M1\\");
+                var fmcName = GetFMCName(isBig, piece);
+
+                data += $"1,{fmcName}.FMC,{srcPath}{fmcName}.SRC,/P=1" + Environment.NewLine;
             }
 
             File.WriteAllText(GRP_PATH, data);
         }
 
-        public void GenerateFMC(Piece p)
+        public void GenerateFMC(bool isBig, Piece p)
         {
             var data = $"[PGKOPF61]" + Environment.NewLine +
                 $"PRNR={id}" + Environment.NewLine +
                 $"LANG={p.Length}" + Environment.NewLine +
-                $"PRPOS={Util.NumberToString(p.Position,100)}" + Environment.NewLine + Environment.NewLine;
-            var filename = Path.Combine(settings.FMCFolder,p.Name + ".FMC");
-
+                $"PRPOS={Util.NumberToString(p.Position,2)}" + Environment.NewLine + Environment.NewLine;
             var instructions = p.Cnc.Substring(0, p.Cnc.Length - 11).Split('W').Skip(1);
 
             foreach (var instruction in instructions)
             {
-                var name = instruction.Substring(0, 8);
+                var name = Util.NumberToString(Int32.Parse(instruction.Substring(0, 8)), isBig ? 8 : 4);
                 var klae = instruction.Substring(8);
 
                 data += "[SWINCL61]" + Environment.NewLine +
@@ -59,9 +60,18 @@ namespace Lib
                     $"KLAE={klae}" + Environment.NewLine;
             }
 
+            string filename = Path.Combine(settings.FMCFolder,
+                    GetFMCName(isBig, p)
+                    + ".FMC");
+            
             File.WriteAllText(filename, data);
         }
 
-
+        private string GetFMCName(bool isBig, Piece p)
+        {
+            return isBig
+                ? p.Name
+                : p.Name.Substring(3, 4) + p.Name.Substring(p.Name.IndexOf('-') + 1);
+        }
     }
 }

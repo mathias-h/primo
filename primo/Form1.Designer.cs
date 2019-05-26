@@ -36,6 +36,7 @@
             this.printerCheckBox = new System.Windows.Forms.CheckBox();
             this.savCheckBox = new System.Windows.Forms.CheckBox();
             this.cncCheckBox = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -77,7 +78,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 90);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Start";
+            this.button1.Text = "Start stor";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -96,7 +97,7 @@
             // 
             this.printerCheckBox.AutoSize = true;
             this.printerCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.printerCheckBox.Location = new System.Drawing.Point(425, 154);
+            this.printerCheckBox.Location = new System.Drawing.Point(421, 254);
             this.printerCheckBox.Name = "printerCheckBox";
             this.printerCheckBox.Size = new System.Drawing.Size(95, 30);
             this.printerCheckBox.TabIndex = 5;
@@ -107,7 +108,7 @@
             // 
             this.savCheckBox.AutoSize = true;
             this.savCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.savCheckBox.Location = new System.Drawing.Point(425, 221);
+            this.savCheckBox.Location = new System.Drawing.Point(421, 321);
             this.savCheckBox.Name = "savCheckBox";
             this.savCheckBox.Size = new System.Drawing.Size(69, 30);
             this.savCheckBox.TabIndex = 6;
@@ -118,18 +119,30 @@
             // 
             this.cncCheckBox.AutoSize = true;
             this.cncCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.cncCheckBox.Location = new System.Drawing.Point(425, 188);
+            this.cncCheckBox.Location = new System.Drawing.Point(421, 288);
             this.cncCheckBox.Name = "cncCheckBox";
             this.cncCheckBox.Size = new System.Drawing.Size(79, 30);
             this.cncCheckBox.TabIndex = 7;
             this.cncCheckBox.Text = "CNC";
             this.cncCheckBox.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(421, 154);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(116, 90);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Start lille";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 379);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.cncCheckBox);
             this.Controls.Add(this.savCheckBox);
             this.Controls.Add(this.printerCheckBox);
@@ -155,6 +168,7 @@
         private System.Windows.Forms.CheckBox printerCheckBox;
         private System.Windows.Forms.CheckBox savCheckBox;
         private System.Windows.Forms.CheckBox cncCheckBox;
+        private System.Windows.Forms.Button button3;
     }
 }
 

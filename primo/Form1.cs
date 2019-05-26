@@ -87,17 +87,7 @@ namespace primo
                 checkedListBox1.SelectedIndex = 0;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowBatch();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowPart();
-        }
-
-        private void button1_Click(object sender, EventArgs args)
+        private void runSelected(bool isBig)
         {
             var pieces = new List<Piece>();
             Parts part = SelectedPart;
@@ -106,13 +96,14 @@ namespace primo
             {
                 throw new Exception("der er ikke valgt en del");
             }
-            
+
             if (SelectedPieces.Count > 0)
             {
                 pieces = SelectedPieces;
                 var p = part.Parts_[0];
                 part = new Parts(part.Id, new List<Part> { new Part(p.Id, p.Name, pieces, -1, p.Ksn) });
-            } else
+            }
+            else
             {
                 foreach (var p in part.Parts_)
                 {
@@ -132,13 +123,33 @@ namespace primo
             }
 
             if (printerSelected) Printer.Print(pieces);
-            if (cncSelected) new Cnc(part.Id, pieces).Start();
+            if (cncSelected) new Cnc(part.Id, pieces).Start(isBig);
             if (savSelected) new Saw(SelectedBatch.Name, part).Start();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowBatch();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowPart();
+        }
+
+        private void button1_Click(object sender, EventArgs args)
+        {
+            runSelected(true);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             ShowBatches();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            runSelected(false);
         }
     }
 }

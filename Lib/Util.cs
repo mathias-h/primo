@@ -1,14 +1,13 @@
-﻿using System;
-
-namespace Lib
+﻿namespace Lib
 {
     class Util
     {
-        public static string NumberToString(int n, int max)
+        public static string NumberToString(int n, int maxLength)
         {
             var pad = "";
-            if (n >= max) throw new ArgumentOutOfRangeException("number too big");
-            for (int i = 0; i < (max-1).ToString().Length-n.ToString().Length; i++)
+            var length = n.ToString().Length;
+
+            for (int i = 0; i < maxLength-length; i++)
             {
                 pad += "0";
             }

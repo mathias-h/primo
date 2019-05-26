@@ -32,10 +32,10 @@ namespace Lib
 
                 foreach (var piece in part.Pieces)
                 {
-                    file.Append($"Len{Util.NumberToString(i, 1000)}=0," +
+                    file.Append($"Len{Util.NumberToString(i, 3)}=0," +
                         $"{parts.PieceCount - i + 1}," + 
                         $"{piece.Length/10}.0,1,0,0,0,0," + 
-                        $"KTN{Util.NumberToString(piece.Ktn, 10000)}{(isFirst ? " KSN" + Util.NumberToString(part.Ksn, 1000) : "")}" +
+                        $"KTN{Util.NumberToString(piece.Ktn, 4)}{(isFirst ? " KSN" + Util.NumberToString(part.Ksn, 3) : "")}" +
                         Environment.NewLine);
                     i++;
                     isFirst = false;
@@ -43,7 +43,7 @@ namespace Lib
                 
                 if (part.EndPiece/10 >= settings.EndPieceLength)
                 {
-                    file.Append($"Len{Util.NumberToString(i, 1000)}=0," + 
+                    file.Append($"Len{Util.NumberToString(i, 3)}=0," + 
                         $"{parts.PieceCount - i + 1}," + 
                         $"{part.EndPiece/10}.0," + 
                         $"1,0,1,0,0,RESTSTYKKE" + 

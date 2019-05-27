@@ -9,14 +9,14 @@ namespace Lib
         private static string LOG_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Primo\error.log";
 
         public int Id { get; }
-        private string[] data;
-        private Exception exception;
+        private string[] Data;
+        private Exception Exception;
 
         public LogException(Exception exception, params string[] data)
         {
             Id = GenerateId();
-            this.exception = exception;
-            this.data = data;
+            Exception = exception;
+            Data = data;
         }
 
         private int GenerateId()
@@ -33,8 +33,8 @@ namespace Lib
         }
 
         public override string ToString() {
-            var exceptionString = String.Join(Environment.NewLine, (exception.ToString()).Split('\n').Select(l => Id + "\t" + l).ToArray());
-            var dataString = String.Join(Environment.NewLine, data.Select(l => Id + "\t" + l).ToArray());
+            var exceptionString = string.Join(Environment.NewLine, (Exception.ToString()).Split('\n').Select(l => Id + "\t" + l).ToArray());
+            var dataString = string.Join(Environment.NewLine, Data.Select(l => Id + "\t" + l).ToArray());
 
             return exceptionString + Environment.NewLine + dataString;
         }

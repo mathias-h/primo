@@ -8,7 +8,7 @@ namespace Lib
 {
     public class Batch
     {
-        private static Settings settings = Settings.Instance;
+        private static readonly Settings settings = Settings.Instance;
         public string Name { get; }
         public List<Parts> Parts { get; }
 

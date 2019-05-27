@@ -7,19 +7,18 @@ namespace Lib
 {
     public class Cnc
     {
-        private static Settings settings = Settings.Instance;
-        private static string GRP_PATH = Path.Combine(settings.GRPFolder, "IMA.GRP");
-        List<Piece> pieces;
-        int id;
+        private static readonly Settings Settings = Settings.Instance;
+        readonly List<Piece> Pieces;
+        readonly int Id;
 
         public Cnc(int id, List<Piece> pieces)
         {
-            this.id = id;
-            this.pieces = pieces;
+            Id = id;
+            Pieces = pieces;
         }
         public void Start(bool isBig)
         {
-            foreach (var piece in pieces)
+            foreach (var piece in Pieces)
             {
                 GenerateFMC(isBig, piece);
             }
@@ -31,7 +30,7 @@ namespace Lib
         {
             var data = "";
             
-            foreach (var piece in pieces)
+            foreach (var piece in Pieces)
             {
                 var srcPath = "C:\\IMAWOP\\" + (isBig ? "SRC1\\" : "M1\\");
                 var fmcName = GetFMCName(isBig, piece);
@@ -39,20 +38,24 @@ namespace Lib
                 data += $"1,{fmcName}.FMC,{srcPath}{fmcName}.SRC,/P=1" + Environment.NewLine;
             }
 
-            File.WriteAllText(GRP_PATH, data);
+            var grpPath = Path.Combine(
+                isBig ? Settings.GRPFolder : Settings.GRPSmallFolder,
+                "IMA.GRP");
+
+            File.WriteAllText(grpPath, data);
         }
 
         public void GenerateFMC(bool isBig, Piece p)
         {
             var data = $"[PGKOPF61]" + Environment.NewLine +
-                $"PRNR={id}" + Environment.NewLine +
+                $"PRNR={Id}" + Environment.NewLine +
                 $"LANG={p.Length}" + Environment.NewLine +
                 $"PRPOS={Util.NumberToString(p.Position,2)}" + Environment.NewLine + Environment.NewLine;
             var instructions = p.Cnc.Substring(0, p.Cnc.Length - 11).Split('W').Skip(1);
 
             foreach (var instruction in instructions)
             {
-                var name = Util.NumberToString(Int32.Parse(instruction.Substring(0, 8)), isBig ? 8 : 4);
+                var name = Util.NumberToString(int.Parse(instruction.Substring(0, 8)), isBig ? 8 : 4);
                 var klae = instruction.Substring(8);
 
                 data += "[SWINCL61]" + Environment.NewLine +
@@ -60,7 +63,7 @@ namespace Lib
                     $"KLAE={klae}" + Environment.NewLine;
             }
 
-            string filename = Path.Combine(settings.FMCFolder,
+            string filename = Path.Combine(Settings.FMCFolder,
                     GetFMCName(isBig, p)
                     + ".FMC");
             
@@ -71,7 +74,7 @@ namespace Lib
         {
             return isBig
                 ? p.Name
-                : p.Name.Substring(3, 4) + p.Name.Substring(p.Name.IndexOf('-') + 1);
+                : p.Name.Substring(3, 4) + p.Name.Substring(p.Name.IndexOf('-') + 1, 4);
         }
     }
 }

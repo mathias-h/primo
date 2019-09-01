@@ -16,11 +16,11 @@ namespace Lib
             Id = id;
             Pieces = pieces;
         }
-        public void Start(bool isBig)
+        public void Start(bool isBig, bool isComplete)
         {
             foreach (var piece in Pieces)
             {
-                GenerateFMC(isBig, piece);
+                GenerateFMC(isBig, isComplete, piece);
             }
 
             GenerateGRP(isBig);
@@ -45,12 +45,14 @@ namespace Lib
             File.WriteAllText(grpPath, data);
         }
 
-        public void GenerateFMC(bool isBig, Piece p)
+        public void GenerateFMC(bool isBig, bool isComplete, Piece p)
         {
             var data = $"[PGKOPF61]" + Environment.NewLine +
                 $"PRNR={Id}" + Environment.NewLine +
                 $"LANG={p.Length}" + Environment.NewLine +
-                $"PRPOS={Util.NumberToString(p.Position,2)}" + Environment.NewLine + Environment.NewLine;
+                $"PRPOS={Util.NumberToString(p.Position, 2)}" + Environment.NewLine +
+                (isComplete ? $"Komplet=1" : "") +
+                Environment.NewLine;
             var instructions = p.Cnc.Substring(0, p.Cnc.Length - 11).Split('W').Skip(1);
 
             foreach (var instruction in instructions)

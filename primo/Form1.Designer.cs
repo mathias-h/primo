@@ -37,6 +37,7 @@
             this.savCheckBox = new System.Windows.Forms.CheckBox();
             this.cncCheckBox = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -46,7 +47,7 @@
             this.listBox1.ItemHeight = 31;
             this.listBox1.Location = new System.Drawing.Point(12, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(136, 283);
+            this.listBox1.Size = new System.Drawing.Size(136, 345);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -68,7 +69,7 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(158, 58);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(254, 301);
+            this.checkedListBox1.Size = new System.Drawing.Size(254, 367);
             this.checkedListBox1.TabIndex = 2;
             // 
             // button1
@@ -85,7 +86,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(12, 301);
+            this.button2.Location = new System.Drawing.Point(12, 381);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 58);
             this.button2.TabIndex = 4;
@@ -97,7 +98,7 @@
             // 
             this.printerCheckBox.AutoSize = true;
             this.printerCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.printerCheckBox.Location = new System.Drawing.Point(421, 254);
+            this.printerCheckBox.Location = new System.Drawing.Point(421, 348);
             this.printerCheckBox.Name = "printerCheckBox";
             this.printerCheckBox.Size = new System.Drawing.Size(95, 30);
             this.printerCheckBox.TabIndex = 5;
@@ -108,7 +109,7 @@
             // 
             this.savCheckBox.AutoSize = true;
             this.savCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.savCheckBox.Location = new System.Drawing.Point(421, 321);
+            this.savCheckBox.Location = new System.Drawing.Point(421, 415);
             this.savCheckBox.Name = "savCheckBox";
             this.savCheckBox.Size = new System.Drawing.Size(69, 30);
             this.savCheckBox.TabIndex = 6;
@@ -119,7 +120,7 @@
             // 
             this.cncCheckBox.AutoSize = true;
             this.cncCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.cncCheckBox.Location = new System.Drawing.Point(421, 288);
+            this.cncCheckBox.Location = new System.Drawing.Point(421, 382);
             this.cncCheckBox.Name = "cncCheckBox";
             this.cncCheckBox.Size = new System.Drawing.Size(79, 30);
             this.cncCheckBox.TabIndex = 7;
@@ -137,11 +138,23 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(421, 250);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(116, 90);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Lille komplet";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 379);
+            this.ClientSize = new System.Drawing.Size(549, 451);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.cncCheckBox);
             this.Controls.Add(this.savCheckBox);
@@ -169,6 +182,7 @@
         private System.Windows.Forms.CheckBox savCheckBox;
         private System.Windows.Forms.CheckBox cncCheckBox;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

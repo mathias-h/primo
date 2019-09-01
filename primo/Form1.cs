@@ -87,7 +87,7 @@ namespace primo
                 checkedListBox1.SelectedIndex = 0;
         }
 
-        private void runSelected(bool isBig)
+        private void runSelected(bool isBig, bool isComplete)
         {
             var pieces = new List<Piece>();
             Parts part = SelectedPart;
@@ -123,7 +123,7 @@ namespace primo
             }
 
             if (printerSelected) Printer.Print(pieces);
-            if (cncSelected) new Cnc(part.Id, pieces).Start(isBig);
+            if (cncSelected) new Cnc(part.Id, pieces).Start(isBig, isComplete);
             if (savSelected) new Saw(SelectedBatch.Name, part).Start();
         }
 
@@ -139,7 +139,7 @@ namespace primo
 
         private void button1_Click(object sender, EventArgs args)
         {
-            runSelected(true);
+            runSelected(true, false);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -149,7 +149,12 @@ namespace primo
 
         private void button3_Click(object sender, EventArgs e)
         {
-            runSelected(false);
+            runSelected(false, false);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            runSelected(false, true);
         }
     }
 }
